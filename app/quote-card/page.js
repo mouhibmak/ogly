@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { trackToolUsed, trackBadgeClicked } from '../lib/analytics';
 
 const PRESETS = [
   { name: 'Midnight', bg: '#0f172a', accent: '#f59e0b' },
@@ -100,7 +101,7 @@ export default function QuoteCardPage() {
               </button>
             ))}
           </div>
-          <a href={url} download="ogly-quote-card.png" style={styles.button}>
+          <a href={url} download="ogly-quote-card.png" style={styles.button} onClick={() => trackToolUsed('quote')}>
             Download PNG (1080 × 1080)
           </a>
           <p style={styles.note}>
@@ -112,6 +113,12 @@ export default function QuoteCardPage() {
           <div style={styles.label}>Live preview</div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={url} alt="Quote card preview" style={styles.preview} />
+          <p style={styles.note}>
+            <a href="/" onClick={() => trackBadgeClicked('quote')}>
+              Made with Ogly
+            </a>{' '}
+            — free quote card maker.
+          </p>
           <code style={styles.code}>{url}</code>
         </div>
       </div>

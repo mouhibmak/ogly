@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { trackToolUsed, trackBadgeClicked } from '../lib/analytics';
 
 const PRESETS = [
   { name: 'Classic', bg: '#fdfbf7', accent: '#1e3a5f' },
@@ -100,7 +101,7 @@ export default function Certificate() {
               </button>
             ))}
           </div>
-          <a href={url} download="ogly-certificate.png" style={styles.button}>
+          <a href={url} download="ogly-certificate.png" style={styles.button} onClick={() => trackToolUsed('certificate')}>
             Download PNG (1600 × 1200)
           </a>
           <p style={styles.note}>
@@ -112,6 +113,12 @@ export default function Certificate() {
           <div style={styles.label}>Live preview</div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={url} alt="Certificate preview" style={styles.preview} />
+          <p style={styles.note}>
+            <a href="/" onClick={() => trackBadgeClicked('certificate')}>
+              Made with Ogly
+            </a>{' '}
+            — free certificate maker.
+          </p>
           <code style={styles.code}>{url}</code>
         </div>
       </div>

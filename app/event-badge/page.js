@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { trackToolUsed, trackBadgeClicked } from '../lib/analytics';
 
 const PRESETS = [
   { name: 'Midnight', bg: '#0f172a', accent: '#f59e0b' },
@@ -100,7 +101,7 @@ export default function EventBadgePage() {
               </button>
             ))}
           </div>
-          <a href={url} download="ogly-event-badge.png" style={styles.button}>
+          <a href={url} download="ogly-event-badge.png" style={styles.button} onClick={() => trackToolUsed('badge')}>
             Download PNG (1200 × 630)
           </a>
           <p style={styles.note}>
@@ -112,6 +113,12 @@ export default function EventBadgePage() {
           <div style={styles.label}>Live preview</div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={url} alt="Event badge preview" style={styles.preview} />
+          <p style={styles.note}>
+            <a href="/" onClick={() => trackBadgeClicked('badge')}>
+              Made with Ogly
+            </a>{' '}
+            — free event badge maker.
+          </p>
           <code style={styles.code}>{url}</code>
         </div>
       </div>

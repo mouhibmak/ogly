@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { trackToolUsed, trackSignup, trackBadgeClicked } from './lib/analytics';
 
 const PRESETS = [
   { name: 'Midnight', bg: '#0f172a', accent: '#f59e0b' },
@@ -68,6 +69,7 @@ export default function Home() {
       });
       const data = await res.json();
       if (data.ok) {
+        trackSignup('home');
         setWaitMsg(data.already ? 'You are already on the list.' : 'You are on the list. Thank you!');
         setEmail('');
       } else {
@@ -128,7 +130,7 @@ export default function Home() {
               </button>
             ))}
           </div>
-          <a href={url} download="ogly-og.png" style={styles.button}>
+          <a href={url} download="ogly-og.png" style={styles.button} onClick={() => trackToolUsed('og')}>
             Download PNG (1200 × 630)
           </a>
           <p style={styles.note}>
@@ -141,6 +143,12 @@ export default function Home() {
           <div style={styles.label}>Live preview</div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={url} alt="OG preview" style={styles.preview} />
+          <p style={styles.note}>
+            <a href="/" onClick={() => trackBadgeClicked('og')}>
+              Made with Ogly
+            </a>{' '}
+            — free OG images for newsletters &amp; blogs.
+          </p>
           <code style={styles.code}>{url}</code>
         </div>
       </div>
@@ -191,7 +199,7 @@ export default function Home() {
 
       <footer style={styles.footer}>
         Ogly — free tools first. <a href="/api-docs">API v1 (beta)</a> ·{' '}
-        <a href="/usage">Usage &amp; rate limits</a> + Pro brand kits.
+        <a href="/pricing">Pricing</a> · <a href="/usage">Usage &amp; rate limits</a> + Pro brand kits.
       </footer>
     </main>
   );

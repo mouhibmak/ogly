@@ -9,5 +9,6 @@ export default function sitemap() {
     { url: `${base}/thumbnail`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/usage`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/api-docs`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${base}/pricing`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
   ];
 }

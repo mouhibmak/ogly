@@ -129,6 +129,13 @@ export default function UsagePage() {
         </tbody>
       </table>
 
+      <p style={styles.body}>
+        Paid plans are coming soon — API Starter $19/mo (1,000 renders/mo),
+        Growth $49/mo (10,000 renders/mo), Scale $99/mo (50,000 renders/mo),
+        Pro $12/mo for the web app. No checkout exists yet; see{' '}
+        <a href="/pricing">/pricing</a> and join the waitlist there.
+      </p>
+
       <h2 style={styles.h2}>How to request a free API key</h2>
       <p style={styles.body}>
         No key is needed during the beta. When the API leaves beta, keys go to

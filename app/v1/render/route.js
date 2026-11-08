@@ -20,6 +20,14 @@
 // memory, so the count is per-instance, best-effort — a single IP
 // hammering from many parallel connections can exceed it. It stops
 // casual abuse; real per-account limits arrive with API keys.
+//
+// first_api_call (M2): there are no API keys in the beta, so "first call
+// per key" cannot exist yet. Instead the route marks the first
+// successful render per IP with the X-Ogly-First-Render response header
+// (same in-memory, best-effort approach as the rate limit). The
+// /api-docs try-it box fires the first_api_call analytics event when it
+// sees that header. True per-key first-call tracking arrives with API
+// keys, post-beta.
 
 import { ImageResponse } from '@vercel/og';
 import { TEMPLATES, clean, color } from '../../../lib/renderers';
@@ -31,6 +39,9 @@ const WINDOW_MS = 24 * 60 * 60 * 1000;
 
 // ip -> { count, resetAt }
 const buckets = new Map();
+
+// IPs that already had one successful render on this instance.
+const seenIps = new Set();
 
 function clientIp(request) {
   const xff = request.headers.get('x-forwarded-for');
@@ -176,9 +187,13 @@ export async function POST(request) {
 
   const data = buildData(template, body?.data);
   const t = TEMPLATES[template];
+  // First successful render for this IP on this instance — the
+  // first_api_call signal (see the header comment above).
+  const isFirstRender = !seenIps.has(ip);
+  if (isFirstRender) seenIps.add(ip);
   return new ImageResponse(t.render(data), {
     width: t.width,
     height: t.height,
-    headers: rateHeaders(limit),
+    headers: { ...rateHeaders(limit), 'X-Ogly-First-Render': isFirstRender ? '1' : '0' },
   });
 }
