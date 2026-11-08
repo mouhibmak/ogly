@@ -1,15 +1,28 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
-  title: 'Ogly — Free OG Image Generator',
+  metadataBase: new URL('https://ogly-mouhib2.vercel.app'),
+  title: 'Free OG Image Generator — Ogly',
   description:
-    'Make an on-brand OG image for your newsletter or blog post in seconds. Free, no sign-up.',
+    'Make a free 1200×630 OG image for your newsletter or blog in seconds. Type, pick a style, download the PNG. No sign-up, no watermark.',
+  openGraph: {
+    title: 'Free OG Image Generator — Ogly',
+    description:
+      'Make a free 1200×630 OG image for your newsletter or blog in seconds. Type, pick a style, download the PNG. No sign-up, no watermark.',
+    url: 'https://ogly-mouhib2.vercel.app',
+    siteName: 'Ogly',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

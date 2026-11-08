@@ -32,3 +32,21 @@ npm run dev
 ## Stack
 
 Next.js 14, React 18, `@vercel/og`. Deploys on Vercel (free tier).
+
+## Traffic measurement (free only, $0)
+
+- **Vercel Web Analytics** — enabled via `@vercel/analytics` (`<Analytics />` in the
+  root layout). Free on the Vercel Hobby plan: 50,000 events/month, 1-month
+  reporting window, no custom events; collection simply pauses if the cap is
+  hit — Hobby cannot be charged, so there is no overage bill. Dashboard:
+  Vercel project → Analytics tab.
+- **Vercel deployment logs** — function invocations per API route give a rough
+  count of images rendered (not unique visitors).
+- **Waitlist** — the real signup count lives only in the Google Form
+  ("Ogly Waitlist") Responses tab / linked Sheet; the `/api/waitlist` GET
+  returns no count because reading form responses needs Google auth the
+  serverless route does not have. Never invent a count.
+- **No Google Search Console yet** — not signed in as the owner; that step
+  needs the owner, not an agent.
+- Week-0 baseline (7 Nov 2026): visits unknown — no analytics existed before
+  this work. See `~/workspace/my-own-project/traffic-log.md`.

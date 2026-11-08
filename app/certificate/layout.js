@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Free Certificate Maker — Ogly',
   description:
-    'Make a printable certificate PNG for free — no sign-up. Type a name, a course or achievement, and a date, pick a style, and download.',
+    'Make a free printable certificate PNG (1600×1200). Type a name, course and date, pick a style, download. No sign-up, no watermark.',
 };
 
 export default function CertificateLayout({ children }) {

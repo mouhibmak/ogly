@@ -1,1 +1,1 @@
-{"dependencies":{"@vercel/og":"^0.6.5","next":"^14.2.5","react":"^18.3.1","react-dom":"^18.3.1"},"name":"ogly","private":true,"scripts":{"build":"next build","dev":"next dev","start":"next start"},"version":"0.1.0"}
+{"dependencies":{"@vercel/analytics":"^2.0.1","@vercel/og":"^0.6.5","next":"^14.2.5","react":"^18.3.1","react-dom":"^18.3.1"},"name":"ogly","private":true,"scripts":{"build":"next build","dev":"next dev","start":"next start"},"version":"0.1.0"}

@@ -9,6 +9,35 @@ const PRESETS = [
   { name: 'Plum', bg: '#4c1d95', accent: '#f0abfc' },
 ];
 
+const FAQS = [
+  {
+    q: 'What size is the quote card?',
+    a: '1080 × 1080 pixels, square — the format that displays best in X and LinkedIn feeds.',
+  },
+  {
+    q: 'Is the quote card maker free?',
+    a: 'Yes. Type your quote and author, add your brand, pick one of the four styles, and download the PNG. No account, no sign-up, no watermark.',
+  },
+  {
+    q: 'How long can the quote be?',
+    a: 'Up to 280 characters. Keep it to one or two short sentences so the text stays large and readable in the square image.',
+  },
+  {
+    q: 'Can I put my own brand on the card?',
+    a: 'Yes — the brand field appears on every card. More brand options are planned for the paid Pro brand kits.',
+  },
+];
+
+const FAQ_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 export default function QuoteCardPage() {
   const [quote, setQuote] = useState('The best time to start was yesterday. The second best time is now.');
   const [author, setAuthor] = useState('Anonymous');
@@ -87,6 +116,20 @@ export default function QuoteCardPage() {
         </div>
       </div>
 
+      <section style={styles.faq}>
+        <h2 style={styles.h2}>Frequently asked questions</h2>
+        {FAQS.map((f) => (
+          <div key={f.q} style={styles.faqItem}>
+            <h3 style={styles.faqQ}>{f.q}</h3>
+            <p style={styles.faqA}>{f.a}</p>
+          </div>
+        ))}
+      </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+      />
+
       <footer style={styles.footer}>
         Ogly — free tools first. Pro API + brand kits coming soon.
       </footer>
@@ -109,5 +152,9 @@ const styles = {
   note: { fontSize: 13, color: '#6b7280', margin: 0 },
   preview: { width: '100%', borderRadius: 8, border: '1px solid #e5e7eb' },
   code: { fontSize: 12, background: '#f3f4f6', padding: 8, borderRadius: 6, wordBreak: 'break-all' },
+  faq: { marginTop: 40 },
+  faqItem: { borderTop: '1px solid #e5e7eb', padding: '16px 0' },
+  faqQ: { fontSize: 17, margin: '0 0 6px' },
+  faqA: { fontSize: 15, color: '#4b5563', margin: 0, lineHeight: 1.6 },
   footer: { marginTop: 40, fontSize: 13, color: '#9ca3af' },
 };

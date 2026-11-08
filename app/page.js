@@ -8,7 +8,37 @@ const PRESETS = [
   { name: 'Ocean', bg: '#0c4a6e', accent: '#38bdf8' },
   { name: 'Plum', bg: '#4c1d95', accent: '#f0abfc' },
   { name: 'Paper', bg: '#fafaf9', accent: '#ea580c' },
+  { name: 'Sunset', bg: '#7c2d12', accent: '#fdba74' },
 ];
+
+const FAQS = [
+  {
+    q: 'What size is the OG image?',
+    a: '1200 × 630 pixels — the standard size for link previews on X, LinkedIn, Facebook and most messaging apps.',
+  },
+  {
+    q: 'Is the OG generator really free?',
+    a: 'Yes. Type your title, subtitle and brand, pick one of the six styles, and download the PNG. No account, no sign-up, no watermark.',
+  },
+  {
+    q: 'Can I use my own brand colours?',
+    a: 'The six built-in styles (Midnight, Forest, Ocean, Plum, Paper, Sunset) each pair a background with an accent colour. Custom colours are planned for the paid API and Pro brand kits.',
+  },
+  {
+    q: 'How do I use the image on my blog or newsletter?',
+    a: 'Download the PNG and set it as your page’s social / Open Graph image — in most platforms that is the “social image” or “OG image” field. When someone shares your link, this image shows in the preview.',
+  },
+];
+
+const FAQ_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const TOOLS = [
   { href: '/certificate', name: 'Certificate Maker', desc: 'Printable certificates, 1600 × 1200' },
@@ -99,7 +129,8 @@ export default function Home() {
             Download PNG (1200 × 630)
           </a>
           <p style={styles.note}>
-            API coming soon: one request, one image — for blogs, newsletters and apps.
+            API v1 is live in beta: one request, one image.{' '}
+            <a href="/api-docs">Read the API docs</a> — free, no key, 100 renders/day.
           </p>
         </div>
 
@@ -120,6 +151,20 @@ export default function Home() {
           </a>
         ))}
       </div>
+
+      <section style={styles.faq}>
+        <h2 style={styles.h2}>Frequently asked questions</h2>
+        {FAQS.map((f) => (
+          <div key={f.q} style={styles.faqItem}>
+            <h3 style={styles.faqQ}>{f.q}</h3>
+            <p style={styles.faqA}>{f.a}</p>
+          </div>
+        ))}
+      </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+      />
 
       <form onSubmit={joinWaitlist} style={styles.waitlist}>
         <h2 style={styles.h2}>Get the API + Pro first</h2>
@@ -142,7 +187,7 @@ export default function Home() {
       </form>
 
       <footer style={styles.footer}>
-        Ogly — free tools first. Pro API + brand kits coming soon.
+        Ogly — free tools first. <a href="/api-docs">API v1 (beta)</a> + Pro brand kits.
       </footer>
     </main>
   );
@@ -166,6 +211,10 @@ const styles = {
   toolDesc: { fontSize: 14, color: '#6b7280' },
   waitlist: { border: '1px solid #e5e7eb', borderRadius: 12, padding: 24, marginTop: 40 },
   waitRow: { display: 'flex', gap: 12 },
+  faq: { marginTop: 40 },
+  faqItem: { borderTop: '1px solid #e5e7eb', padding: '16px 0' },
+  faqQ: { fontSize: 17, margin: '0 0 6px' },
+  faqA: { fontSize: 15, color: '#4b5563', margin: 0, lineHeight: 1.6 },
   waitButton: { background: '#111827', color: '#fff', padding: '10px 18px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 16 },
   preview: { width: '100%', borderRadius: 8, border: '1px solid #e5e7eb' },
   code: { fontSize: 12, background: '#f3f4f6', padding: 8, borderRadius: 6, wordBreak: 'break-all' },

@@ -9,6 +9,35 @@ const PRESETS = [
   { name: 'Plum', bg: '#fdf4ff', accent: '#701a75' },
 ];
 
+const FAQS = [
+  {
+    q: 'What size is the certificate?',
+    a: '1600 × 1200 pixels, landscape — sized to print cleanly on a standard page and to share as an image.',
+  },
+  {
+    q: 'Is the certificate maker free?',
+    a: 'Yes. Type the recipient name, course or achievement, date and issuer, pick one of the four styles, and download the PNG. No account, no sign-up, no watermark.',
+  },
+  {
+    q: 'Can I print the certificate?',
+    a: 'Yes — download the PNG and print it from any photo or document app. It is a landscape image, so print it in landscape orientation.',
+  },
+  {
+    q: 'Can I use it for my own course or workshop?',
+    a: 'Yes. Put your own name or organisation in the issuer field and hand the certificates to your participants.',
+  },
+];
+
+const FAQ_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 export default function Certificate() {
   const [name, setName] = useState('Your Name');
   const [course, setCourse] = useState('Course or achievement');
@@ -87,6 +116,20 @@ export default function Certificate() {
         </div>
       </div>
 
+      <section style={styles.faq}>
+        <h2 style={styles.h2}>Frequently asked questions</h2>
+        {FAQS.map((f) => (
+          <div key={f.q} style={styles.faqItem}>
+            <h3 style={styles.faqQ}>{f.q}</h3>
+            <p style={styles.faqA}>{f.a}</p>
+          </div>
+        ))}
+      </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+      />
+
       <footer style={styles.footer}>
         Ogly — free tools first. Pro API + brand kits coming soon.
       </footer>
@@ -108,5 +151,9 @@ const styles = {
   note: { fontSize: 13, color: '#6b7280', margin: 0 },
   preview: { width: '100%', borderRadius: 8, border: '1px solid #e5e7eb' },
   code: { fontSize: 12, background: '#f3f4f6', padding: 8, borderRadius: 6, wordBreak: 'break-all' },
+  faq: { marginTop: 40 },
+  faqItem: { borderTop: '1px solid #e5e7eb', padding: '16px 0' },
+  faqQ: { fontSize: 17, margin: '0 0 6px' },
+  faqA: { fontSize: 15, color: '#4b5563', margin: 0, lineHeight: 1.6 },
   footer: { marginTop: 40, fontSize: 13, color: '#9ca3af' },
 };
