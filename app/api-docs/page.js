@@ -9,6 +9,7 @@ const TEMPLATES = [
   { name: 'certificate', size: '1600 × 1200', desc: 'Certificate of completion — name, course, date, issuer.' },
   { name: 'quote', size: '1080 × 1080', desc: 'Square quote card — quote, author, brand.' },
   { name: 'badge', size: '1200 × 630', desc: 'Event speaker badge — name, role, event, date.' },
+  { name: 'thumbnail', size: '1280 × 720', desc: 'YouTube thumbnail — title, subtitle, brand.' },
 ];
 
 const CURL_EXAMPLE = `curl -X POST ${BASE}/v1/render \\
@@ -59,7 +60,7 @@ const FAQS = [
   },
   {
     q: 'What does the API return?',
-    a: 'A PNG image (image/png) at the template size — 1200 × 630 for og and badge, 1600 × 1200 for certificate, 1080 × 1080 for quote. Errors return JSON with { ok: false, error }. Unknown template or bad JSON returns 400.',
+    a: 'A PNG image (image/png) at the template size — 1200 × 630 for og and badge, 1600 × 1200 for certificate, 1080 × 1080 for quote, 1280 × 720 for thumbnail. Errors return JSON with { ok: false, error }. Unknown template or bad JSON returns 400.',
   },
   {
     q: 'Can I use the images commercially?',

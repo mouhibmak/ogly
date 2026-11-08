@@ -295,6 +295,54 @@ export function renderBadge({ name, role, event, date, bg, accent }) {
   );
 }
 
+export function renderThumbnail({ title, subtitle, brand, bg, accent }) {
+  // Big, high-contrast title for a 1280x720 YouTube thumbnail: readable
+  // at small sizes in a feed, so the title shrinks as it gets longer.
+  const titleSize = title.length > 70 ? 62 : title.length > 45 ? 78 : 92;
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        background: bg,
+        padding: '64px 72px',
+        fontFamily: 'sans-serif',
+        color: '#ffffff',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: 14,
+            background: accent,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 30,
+            fontWeight: 800,
+            color: '#0f172a',
+          }}
+        >
+          {brand.slice(0, 1).toUpperCase()}
+        </div>
+        <div style={{ fontSize: 30, fontWeight: 700 }}>{brand}</div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ fontSize: titleSize, fontWeight: 800, lineHeight: 1.05 }}>{title}</div>
+        <div style={{ fontSize: 32, lineHeight: 1.3, opacity: 0.85 }}>{subtitle}</div>
+      </div>
+      <div
+        style={{ width: 160, height: 10, borderRadius: 5, background: accent }}
+      />
+    </div>
+  );
+}
+
 // Template registry: name -> size + renderer + the data fields it takes.
 // The v1 API and the docs page both read this list, so they cannot drift.
 export const TEMPLATES = {
@@ -325,5 +373,12 @@ export const TEMPLATES = {
     render: renderBadge,
     fields: ['name', 'role', 'event', 'date', 'bg', 'accent'],
     description: 'Event speaker badge, 1200 × 630',
+  },
+  thumbnail: {
+    width: 1280,
+    height: 720,
+    render: renderThumbnail,
+    fields: ['title', 'subtitle', 'brand', 'bg', 'accent'],
+    description: 'YouTube thumbnail, 1280 × 720',
   },
 };

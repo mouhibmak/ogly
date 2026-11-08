@@ -9,6 +9,8 @@ const PRESETS = [
   { name: 'Plum', bg: '#4c1d95', accent: '#f0abfc' },
   { name: 'Paper', bg: '#fafaf9', accent: '#ea580c' },
   { name: 'Sunset', bg: '#7c2d12', accent: '#fdba74' },
+  { name: 'Coral', bg: '#9f1239', accent: '#fda4af' },
+  { name: 'Teal', bg: '#134e4a', accent: '#5eead4' },
 ];
 
 const FAQS = [
@@ -18,11 +20,11 @@ const FAQS = [
   },
   {
     q: 'Is the OG generator really free?',
-    a: 'Yes. Type your title, subtitle and brand, pick one of the six styles, and download the PNG. No account, no sign-up, no watermark.',
+    a: 'Yes. Type your title, subtitle and brand, pick one of the eight styles, and download the PNG. No account, no sign-up, no watermark.',
   },
   {
     q: 'Can I use my own brand colours?',
-    a: 'The six built-in styles (Midnight, Forest, Ocean, Plum, Paper, Sunset) each pair a background with an accent colour. Custom colours are planned for the paid API and Pro brand kits.',
+    a: 'The eight built-in styles (Midnight, Forest, Ocean, Plum, Paper, Sunset, Coral, Teal) each pair a background with an accent colour. Custom colours are planned for the paid API and Pro brand kits.',
   },
   {
     q: 'How do I use the image on my blog or newsletter?',
@@ -44,6 +46,7 @@ const TOOLS = [
   { href: '/certificate', name: 'Certificate Maker', desc: 'Printable certificates, 1600 × 1200' },
   { href: '/quote-card', name: 'Quote Card Maker', desc: 'Square quote cards, 1080 × 1080' },
   { href: '/event-badge', name: 'Event Badge Maker', desc: 'Speaker cards, 1200 × 630' },
+  { href: '/thumbnail', name: 'YouTube Thumbnail Maker', desc: 'Thumbnails, 1280 × 720' },
 ];
 
 export default function Home() {
@@ -187,7 +190,8 @@ export default function Home() {
       </form>
 
       <footer style={styles.footer}>
-        Ogly — free tools first. <a href="/api-docs">API v1 (beta)</a> + Pro brand kits.
+        Ogly — free tools first. <a href="/api-docs">API v1 (beta)</a> ·{' '}
+        <a href="/usage">Usage &amp; rate limits</a> + Pro brand kits.
       </footer>
     </main>
   );
@@ -206,7 +210,7 @@ const styles = {
   button: { display: 'inline-block', textAlign: 'center', background: '#111827', color: '#fff', padding: '14px 18px', borderRadius: 10, textDecoration: 'none', fontWeight: 700, marginTop: 8 },
   note: { fontSize: 13, color: '#6b7280', margin: 0 },
   h2: { fontSize: 28, margin: '40px 0 16px' },
-  tools: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 },
+  tools: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 },
   tool: { border: '1px solid #e5e7eb', borderRadius: 12, padding: 20, textDecoration: 'none', color: '#111827', display: 'flex', flexDirection: 'column', gap: 6 },
   toolDesc: { fontSize: 14, color: '#6b7280' },
   waitlist: { border: '1px solid #e5e7eb', borderRadius: 12, padding: 24, marginTop: 40 },

@@ -8,7 +8,7 @@
 //   "brand": "Acme", "bg": "#0f172a", "accent": "#f59e0b" } }
 //   -> image/png, 1200x630
 // Templates: og (1200x630), certificate (1600x1200), quote (1080x1080),
-// badge (1200x630). Unknown template or bad JSON -> 400 JSON.
+// badge (1200x630), thumbnail (1280x720). Unknown template or bad JSON -> 400 JSON.
 //
 // No billing: the beta is free and needs no API key. A free API-key
 // request form lives on /api-docs; requests join the Ogly waitlist
@@ -101,6 +101,14 @@ function buildData(template, raw) {
         role: clean(d.role, 'Speaker', 80),
         event: clean(d.event, 'Event', 80),
         date: clean(d.date, '', 40),
+        bg: color(d.bg, '#0f172a'),
+        accent: color(d.accent, '#f59e0b'),
+      };
+    case 'thumbnail':
+      return {
+        title: clean(d.title, 'Your video title here', 100),
+        subtitle: clean(d.subtitle, 'One line that makes people click.', 120),
+        brand: clean(d.brand, 'Ogly', 40),
         bg: color(d.bg, '#0f172a'),
         accent: color(d.accent, '#f59e0b'),
       };
